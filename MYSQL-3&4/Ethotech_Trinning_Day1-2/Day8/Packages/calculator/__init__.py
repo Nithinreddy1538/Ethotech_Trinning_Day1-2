@@ -1,1 +1,0 @@
-print("package is loaded")
