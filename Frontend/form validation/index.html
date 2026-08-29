@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validate Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="form">
+
+    <h1>Registration Form</h1>
+    <p>Create Account To Login</p>
+
+    <form onsubmit="return validateform()"action="abc.html">
+
+        <label for="username">User Name:</label>
+        <input 
+            type="text"
+            placeholder="Enter user name"
+            id="username"
+        >
+        <br><br><br>
+
+        <label for="email">E-Mail:</label>
+        <input 
+            type="text"
+            placeholder="Enter user email"
+            id="email"
+        >
+        <br><br><br>
+
+        <label for="password">Password:</label>
+        <input 
+            type="password"
+            placeholder="Enter password"
+            id="password"
+        >
+        <br><br><br>
+
+        <label for="repassword">RePassword:</label>
+        <input 
+            type="password"
+            placeholder="Re-enter password"
+            id="repassword"
+        >
+        <br><br><br>
+
+        <button type="submit" id="btn">Submit</button>
+
+    </form>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

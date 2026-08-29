@@ -1,0 +1,16 @@
+.form {
+    background-color: rgb(235, 242, 244);
+    text-align: center;
+    max-width: fit-content;
+    min-height: auto;
+    padding: 30px;
+    margin: auto;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Melodify</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%8E%B5</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="mobile-topbar">
+        <div class="logo">Melodify</div>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">&#9776;</button>
+    </div>
+
+    <div class="main-layout">
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">Melodify</div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="dashboard.html" class="nav-link active"><i class="icon-dashboard"></i> Dashboard</a></li>
+                    <li><a href="music_library.html" class="nav-link"><i class="icon-music"></i> Music Library</a></li>
+                    <li><a href="my_playlists.html" class="nav-link"><i class="icon-playlist"></i> My Playlists</a></li>
+                    <li><a href="my_favorites.html" class="nav-link"><i class="icon-heart"></i> My Favorites</a></li>
+                    <li><a href="my_history.html" class="nav-link"><i class="icon-history"></i> Listening History</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div id="admin-badge-slot"></div>
+                <button id="logout-btn" class="btn-logout"><i class="icon-logout"></i> Logout</button>
+            </div>
+        </aside>
+
+        <div class="content-area">
+            <header class="top-header">
+                <div class="welcome-message">
+                    <h1>Welcome back, <span id="username-display"></span>!</h1>
+                    <p>What would you like to listen to today?</p>
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for songs, artists, albums...">
+                    <button><i class="icon-search"></i></button>
+                </div>
+            </header>
+
+            <main class="dashboard-content">
+                <section class="section-recently-played">
+                    <h2 class="section-title">Recently Played</h2>
+                    <div class="card-grid" id="recently-played-grid">
+                        <div class="music-card loading-card"></div>
+                        <div class="music-card loading-card"></div>
+                        <div class="music-card loading-card"></div>
+                        <div class="music-card loading-card"></div>
+                    </div>
+                </section>
+
+                <section class="section-featured-playlists">
+                    <h2 class="section-title">Featured Playlists</h2>
+                    <div class="card-grid" id="featured-playlists-grid">
+                        <div class="music-card loading-card"></div>
+                        <div class="music-card loading-card"></div>
+                        <div class="music-card loading-card"></div>
+                    </div>
+                </section>
+
+                <section class="section-new-releases">
+                    <h2 class="section-title">New Releases</h2>
+                    <div class="card-grid" id="new-releases-grid">
+                        <div class="music-card loading-card"></div>
+                        <div class="music-card loading-card"></div>
+                        <div class="music-card loading-card"></div>
+                        <div class="music-card loading-card"></div>
+                        <div class="music-card loading-card"></div>
+                    </div>
+                </section>
+            </main>
+
+            <div id="audio-player-container" class="audio-player-container">
+                <audio id="audio-player" controls></audio>
+                <div id="now-playing-info"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/music.js"></script>
+</body>
+</html>
