@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amount</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 0px 200px 0px 200px;
+        }
+        #btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #category, #transaction-type, #name, #amount {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+       h2{
+        align-items: center;
+        color: #4CAF50;
+       } 
+       .container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .container div {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+      
+    </style>
+</head>
+<body>
+    <div class="container">
+         <div>
+            <div>
+                <h3>Income</h3>
+                <p>
+                    ₹<span id="totalIncome">0.00</span>
+                </p>
+            </div>
+            <div>
+                <h3>Expense</h3>
+                <p>
+                    ₹<span id="totalExpense">0.00</span>
+                </p>
+            </div>
+            <div>
+                <h3>Balance</h3>
+                <p>
+                    ₹<span id="totalBalance">0.00</span>
+                </p>
+                <p id="message" style="color: red;"></p>
+            </div>
+        </div>
+    </div>
+    <form id="form">
+         <h2>Expense Tracker</h2>
+        <input 
+            type="text"
+            placeholder="Enter your name"
+            id="name"><br><br><br>
+        
+        <input 
+            type="number"
+            placeholder="Enter amount"
+            id="amount"><br><br><br>
+
+
+         <select id="transaction-type">
+            <option value="Select">--Select--</option>
+        <option value="income">income</option>
+        <option value="expense">Expense</option>
+    </select>
+<br><br><br>
+     <select id="category">
+            <option value="Select">--Category--</option>
+        <option value="salary">Salary</option>
+        <option value="freelance">Freelance</option>
+        <option value="business">Business</option>
+    </select><br><br><br>
+        
+    <button type="submit" id="btn">Add Transaction</button>
+
+    </form>
+    <div class="">
+        <h2>Transactions</h2>
+        <div id="list"></div>
+    </div>
+<script>
+    
+const a = document.getElementById("totalIncome");
+const b = document.getElementById("totalExpense");
+const c = document.getElementById("totalBalance");
+
+const d = document.getElementById("form");
+const e = document.getElementById("name");
+const amountInput = document.getElementById("amount");
+const f = document.getElementById("transaction-type");
+const categoryInput = document.getElementById("category");
+const g = document.getElementById("list");
+const h = document.getElementById("message");
+
+
+let transactions = [];
+
+let savedTransactions = localStorage.getItem("transactions");
+
+if (savedTransactions) {
+    transactions = JSON.parse(savedTransactions);
+}
+
+
+d.addEventListener("submit", addTransaction);
+
+
+function addTransaction(event) {
+
+    event.preventDefault();
+
+    const name = e.value.trim();
+
+    const amount = Number(amountInput.value);
+
+    const category = categoryInput.value;
+
+    const type = f.value;
+
+
+    if (
+        name === "" ||
+        amount <= 0 ||
+        category === "Select" ||
+        type === "Select"
+    ) {
+
+        h.textContent = "All fields are required!";
+
+        return;
+    }
+
+
+    const transaction = {
+
+        name: name,
+
+        amount: amount,
+
+        category: category,
+
+        type: type
+
+    };
+
+
+    transactions.push(transaction);
+
+    saveTransactions();
+
+    renderTransactions();
+
+    d.reset();
+
+    h.textContent = "Transaction added successfully";
+
+}
+
+
+function renderTransactions(transactionArray = transactions) {
+
+    g.innerHTML = "";
+
+
+    transactionArray.forEach(function (transaction) {
+
+        const sign =
+            transaction.type === "income" ? "+" : "-";
+
+
+        const amountClass =
+            transaction.type === "income"
+                ? "income-amount"
+                : "expense-amount";
+
+
+        g.innerHTML += `
+
+        <div class="transaction">
+
+            <div class="transaction-info">
+
+                <h3>${transaction.name}</h3>
+
+                <p>${transaction.category}</p>
+
+            </div>
+
+
+            <div class="transaction-amount">
+
+                <span class="${amountClass}">
+
+                    ${sign}₹${transaction.amount}
+
+                </span>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+
+    calculateTotal();
+
+}
+
+
+function calculateTotal() {
+
+    const income = transactions
+
+        .filter(function (transaction) {
+
+            return transaction.type === "income";
+
+        })
+
+        .reduce(function (total, transaction) {
+
+            return total + Number(transaction.amount);
+
+        }, 0);
+
+
+    const expense = transactions
+
+        .filter(function (transaction) {
+
+            return transaction.type === "expense";
+
+        })
+
+        .reduce(function (total, transaction) {
+
+            return total + Number(transaction.amount);
+
+        }, 0);
+
+
+    const currentBalance = income - expense;
+
+
+    a.textContent = income.toFixed(2);
+
+    b.textContent = expense.toFixed(2);
+
+    c.textContent = currentBalance.toFixed(2);
+
+}
+
+
+function saveTransactions() {
+
+    localStorage.setItem(
+        "transactions",
+        JSON.stringify(transactions)
+    );
+
+}
+
+
+renderTransactions();
+
+</script>
+</body>
+</html>
