@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Analytics - Melodify</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%8E%B5</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .stat-card {
+            background-color: var(--surface-color);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255, 149, 0, 0.15);
+        }
+        .stat-card h3 {
+            font-size: 1.2rem;
+            color: var(--text-secondary-color);
+            margin-bottom: 10px;
+        }
+        .stat-card .stat-number {
+            font-size: 3rem;
+            font-weight: 600;
+            color: #FF9500;
+        }
+        .chart-container {
+            background-color: var(--surface-color);
+            padding: 30px;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-topbar">
+        <div class="logo">Melodify Admin</div>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">&#9776;</button>
+    </div>
+
+    <div class="main-layout admin-layout">
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+        <aside class="sidebar" id="sidebar">
+            <div>
+                <div class="logo">Melodify</div>
+                <span class="logo-subtitle">Admin Panel</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="admin_dashboard.html" class="nav-link"><i class="icon-dashboard"></i> Overview</a></li>
+                    <li><a href="upload_music.html" class="nav-link"><i class="icon-music"></i> Upload Music</a></li>
+                    <li><a href="admin_analytics.html" class="nav-link active"><i class="icon-history"></i> Analytics</a></li>
+                    <li><a href="http://127.0.0.1:8000/admin/" class="nav-link" target="_blank"><i class="icon-playlist"></i> Content Management</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="dashboard.html" class="back-to-app-link">&larr; Back to listener app</a>
+                <button id="logout-btn" class="btn-logout"><i class="icon-logout"></i> Logout</button>
+            </div>
+        </aside>
+
+        <div class="content-area">
+            <header class="top-header">
+                <div class="welcome-message">
+                    <h1>Admin Analytics</h1>
+                    <p>Performance overview of the Melodify platform.</p>
+                </div>
+            </header>
+
+            <main class="main-content" id="analytics-content">
+                <p class="loading-message">Loading analytics data...</p>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/music.js"></script>
+</body>
+</html>
