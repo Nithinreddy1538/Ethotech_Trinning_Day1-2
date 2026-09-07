@@ -7,7 +7,7 @@ function Navbar(){
         <h2>Fake Store</h2>
         <div style={styles.links}>
             <Link to="/" style={styles.link}>Home</Link>
-            <Link to="/products" style={styles.link}>Products</Link>
+            <Link to="/product" style={styles.link}>Products</Link>
             <Link to="/about" style={styles.link}>About</Link>
             <Link to="/contact" style={styles.link}>Contact</Link>
         </div>
