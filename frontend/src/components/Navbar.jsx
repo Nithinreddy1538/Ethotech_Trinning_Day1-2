@@ -19,8 +19,8 @@ const styles ={
   nav: {
     display: 'flex',
     justifyContent: 'space-between',
-    background: "black",
-    color: "#fff",
+    background: "#ec6666",
+    color: "#ffffff",
     alignItems: "center",
     padding: "15px 40px"
   },
